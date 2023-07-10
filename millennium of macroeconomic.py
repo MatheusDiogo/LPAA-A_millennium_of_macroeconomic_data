@@ -20,3 +20,12 @@ cols = df.columns
 cols = cols.map(lambda x: x.replace(',', ' in') if isinstance(x, (str)) else x)
 cols = cols.map(lambda x: x.replace(' ', '_') if isinstance(x, (str)) else x)
 df.columns = cols
+
+filtroBritain = pd.DataFrame(df.drop(df.query('Population_of_Great_Britain_in_millions == 0').index))
+filtroBritain.reset_index(drop = True, inplace = True)
+plt.plot(filtroBritain['Year'], filtroBritain['Population_of_Great_Britain_in_millions'], label='População da Grã-Bretanha')
+plt.plot('Year', 'Population_of_England_in_millions', data=df, color='r', label='População da Inglaterra')
+plt.xlabel('Ano')
+plt.ylabel('População (milhões)')
+plt.title('População ao Longo do Tempo')
+plt.legend()
