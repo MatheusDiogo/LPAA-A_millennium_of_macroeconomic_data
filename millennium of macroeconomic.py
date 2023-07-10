@@ -14,3 +14,9 @@ df['Year'] = df['Year'].astype(float)
 df['Population of England, millions'] = df['Population of England, millions'].astype(float)
 df['Population of Great Britain, millions'] = df['Population of Great Britain, millions'].astype(float)
 df.reset_index(drop = True, inplace= True)
+
+#Removendo espaços em branco das colunas
+cols = df.columns
+cols = cols.map(lambda x: x.replace(',', ' in') if isinstance(x, (str)) else x)
+cols = cols.map(lambda x: x.replace(' ', '_') if isinstance(x, (str)) else x)
+df.columns = cols
