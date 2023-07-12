@@ -9,3 +9,9 @@ agri_eng = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A3. Eng. Agriculture 12
 rebanhos_eng = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A3. Eng. Agriculture 1270-1870', skiprows = range(0, 10), usecols = 'A, Y:AA'))
 pecuaria_eng = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A3. Eng. Agriculture 1270-1870', skiprows = range(0, 10), usecols = 'A, AC:AJ'))
 
+agri_eng.drop(index = [0], inplace = True)
+agri_eng.reset_index(drop = True, inplace = True)
+rebanhos_eng.drop(index = [0], inplace = True)
+rebanhos_eng.reset_index(drop = True, inplace = True)
+pecuaria_eng.drop(index = [0], inplace = True)
+pecuaria_eng.reset_index(drop = True, inplace = True)
