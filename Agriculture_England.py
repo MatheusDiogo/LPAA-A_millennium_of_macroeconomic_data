@@ -18,7 +18,7 @@ pecuaria_eng.drop(index = [0], inplace = True)
 pecuaria_eng.reset_index(drop = True, inplace = True)
 
 #Plotando Gráfico de Série das produções agriculas
-plt.figure(figsize = ((12, 12)))
+plt.figure(figsize = ((19.5, 12))))
 plt.subplot(3, 2, 1)
 plt.plot(agri_eng['Year'], agri_eng['Wheat.1'], label='Trigo')
 plt.title('Trigo')
@@ -50,4 +50,4 @@ plt.title('Tomate')
 plt.xlabel('Year')
 
 plt.suptitle("Production Agriculture in million bushels")
-plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.3, hspace=0.7)
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.15, hspace=0.3)
