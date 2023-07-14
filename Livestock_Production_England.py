@@ -55,3 +55,16 @@ plt.xlabel('Year')
 
 plt.suptitle("Livestock products production in millions")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.15, hspace=0.4)
+
+#Gráfico único
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Beef '], color='r', label='Carne Bovina')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Milk '], label='Leite')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Veal '], color='y', label='Vitela')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Mutton '], color='purple', label='Carne Carneiro')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Pork '], color='k', label='Carne de Porco')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Wool '], color='b', label='Lã')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Hides'], color='g', label='Peles')
+plt.plot(pecuaria_eng['Year'], pecuaria_eng['Hay'], color='orange', label='Feno')
+plt.legend()
+plt.title('Livestock products production in millions')
+plt.xlabel('Year')
