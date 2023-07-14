@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+#from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
 URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQSv10S9cssxOoBF2QGYNukBK-vCgB8fVkhqwtj5n0ASD0OLVBpF15lKakXNUia-90CXokHd47r572c/pub?output=xlsx'
@@ -38,3 +39,5 @@ plt.legend()
 
 plt.suptitle("Number of animals in millions")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.88, wspace=0.15, hspace=0.35)
+
+rebanhos_eng['Century'] = find_century(rebanhos_eng['Year'])
