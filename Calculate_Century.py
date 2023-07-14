@@ -1,8 +1,14 @@
+import pandas as pd
+
 def find_century(year):
+
+    # Calculando seculo caso seja passada uma lista de anos
+    if isinstance(year, pd.Series):
+        return year.apply(find_century)
+        
     # Valores incorretos recebidos retornarão 0
     if (year <= 0):
         return 0
-         
     # Calculando seculo
     elif (year <= 100):
         return 1
