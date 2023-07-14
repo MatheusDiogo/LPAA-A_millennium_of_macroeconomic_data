@@ -30,3 +30,11 @@ plt.xlabel('Year')
 
 plt.suptitle("Number of animals in millions")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.8, wspace=0.2, hspace=0.7)
+
+#Gráfico único
+plt.plot(rebanhos_eng['Year'], rebanhos_eng['Cattle'], label='Gado')
+plt.plot(rebanhos_eng['Year'], rebanhos_eng['Sheep'], color='r', label='Ovelha')
+plt.plot(rebanhos_eng['Year'], rebanhos_eng['Pigs'], color='k', label='Porco')
+plt.xlabel('Year')
+plt.legend()
+plt.suptitle("Number of animals in millions")
