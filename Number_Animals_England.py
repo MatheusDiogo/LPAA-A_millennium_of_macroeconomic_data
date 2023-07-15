@@ -40,4 +40,17 @@ plt.legend()
 plt.suptitle("Number of animals in millions")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.88, wspace=0.15, hspace=0.35)
 
+#Análise gráfica por século
 rebanhos_eng['Century'] = find_century(rebanhos_eng['Year'])
+dados_Seculo = pd.DataFrame()
+dados_Seculo['Cattle'] = rebanhos_eng.groupby(['Century'])['Cattle'].sum()
+dados_Seculo['Sheep'] = rebanhos_eng.groupby(['Century'])['Sheep'].sum()
+dados_Seculo['Pigs'] = rebanhos_eng.groupby(['Century'])['Pigs'].sum()
+dados_Seculo
+
+#Plotando gráfico de barras empilhadas
+plt.bar(dados_Seculo.index, dados_Seculo['Cattle'], color='orange', label='Gado')
+plt.bar(dados_Seculo.index, dados_Seculo['Sheep'], label='Ovelha', bottom = dados_Seculo['Cattle'])
+plt.bar(dados_Seculo.index, dados_Seculo['Pigs'], color='g', label='Porco', bottom = dados_Seculo['Cattle'] + dados_Seculo['Sheep'])
+plt.xlabel('Century')
+plt.legend()
