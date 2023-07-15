@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+#from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
 URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQSv10S9cssxOoBF2QGYNukBK-vCgB8fVkhqwtj5n0ASD0OLVBpF15lKakXNUia-90CXokHd47r572c/pub?output=xlsx'
@@ -68,3 +69,28 @@ plt.plot(pecuaria_eng['Year'], pecuaria_eng['Hay'], color='orange', label='Feno'
 plt.legend()
 plt.title('Livestock products production in millions')
 plt.xlabel('Year')
+
+#Recebendo dados por século
+pecuaria_eng['Century'] = find_century(pecuaria_eng['Year'])
+dados_Seculo = pd.DataFrame()
+dados_Seculo['Milk'] = pecuaria_eng.groupby(['Century'])['Milk '].sum()
+dados_Seculo['Beef'] = pecuaria_eng.groupby(['Century'])['Beef '].sum()
+dados_Seculo['Veal'] = pecuaria_eng.groupby(['Century'])['Veal '].sum()
+dados_Seculo['Mutton'] = pecuaria_eng.groupby(['Century'])['Mutton '].sum()
+dados_Seculo['Pork'] = pecuaria_eng.groupby(['Century'])['Pork '].sum()
+dados_Seculo['Wool'] = pecuaria_eng.groupby(['Century'])['Wool '].sum()
+dados_Seculo['Hides'] = pecuaria_eng.groupby(['Century'])['Hides'].sum()
+dados_Seculo['Hay'] = pecuaria_eng.groupby(['Century'])['Hay'].sum()
+dados_Seculo
+
+#Plotando gráfico de barras empilhadas
+plt.bar(dados_Seculo.index, dados_Seculo['Milk'], color='orange', label='Milk')
+plt.bar(dados_Seculo.index, dados_Seculo['Beef'], color='purple', label='Beef', bottom = dados_Seculo['Milk'])
+plt.bar(dados_Seculo.index, dados_Seculo['Veal'], color='gray', label='Veal', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'])
+plt.bar(dados_Seculo.index, dados_Seculo['Mutton'], color='g', label='Mutton', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal'])
+plt.bar(dados_Seculo.index, dados_Seculo['Pork'], color='pink', label='Pork', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal']  + dados_Seculo['Mutton'])
+plt.bar(dados_Seculo.index, dados_Seculo['Wool'], color='b', label='Wool', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal'] + dados_Seculo['Mutton'] + dados_Seculo['Pork'])
+plt.bar(dados_Seculo.index, dados_Seculo['Hides'], color='y', label='Hides', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal'] + dados_Seculo['Mutton'] + dados_Seculo['Pork'] + dados_Seculo['Wool'])
+plt.bar(dados_Seculo.index, dados_Seculo['Hay'], color='r', label='Hay', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal'] + dados_Seculo['Mutton'] + dados_Seculo['Pork'] + dados_Seculo['Wool'] + dados_Seculo['Hides'])
+plt.xlabel('Century')
+plt.legend()
