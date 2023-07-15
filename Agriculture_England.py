@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+#from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
 URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQSv10S9cssxOoBF2QGYNukBK-vCgB8fVkhqwtj5n0ASD0OLVBpF15lKakXNUia-90CXokHd47r572c/pub?output=xlsx'
@@ -45,3 +46,24 @@ plt.xlabel('Year')
 
 plt.suptitle("Production Agriculture in million bushels")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.15, hspace=0.3)
+
+#Iniciando análise por séculos
+agri_eng['Century'] = find_century(agri_eng['Year'])
+dados_Seculo = pd.DataFrame()
+dados_Seculo['Wheat'] = agri_eng.groupby(['Century'])['Wheat.1'].sum()
+dados_Seculo['Rye'] = agri_eng.groupby(['Century'])['Rye.1'].sum()
+dados_Seculo['Barley'] = agri_eng.groupby(['Century'])['Barley.1'].sum()
+dados_Seculo['Oats'] = agri_eng.groupby(['Century'])['Oats.1'].sum()
+dados_Seculo['Pulses'] = agri_eng.groupby(['Century'])['Pulses.1'].sum()
+dados_Seculo['Potatoes'] = agri_eng.groupby(['Century'])['Potatoes.1'].sum()
+dados_Seculo
+
+#Plotando gráfico de barras empilhadas
+plt.bar(dados_Seculo.index, dados_Seculo['Wheat'], color='orange', label='Milk')
+plt.bar(dados_Seculo.index, dados_Seculo['Rye'], color='purple', label='Beef', bottom = dados_Seculo['Wheat'])
+plt.bar(dados_Seculo.index, dados_Seculo['Barley'], color='gray', label='Veal', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'])
+plt.bar(dados_Seculo.index, dados_Seculo['Oats'], color='g', label='Mutton', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'])
+plt.bar(dados_Seculo.index, dados_Seculo['Pulses'], color='pink', label='Pork', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'])
+plt.bar(dados_Seculo.index, dados_Seculo['Potatoes'], label='Pork', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'] + dados_Seculo['Pulses'])
+plt.xlabel('Century')
+plt.legend()
