@@ -81,5 +81,5 @@ plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Potatoes'], label='Potatoes', 
 
 plt.xlabel('Century')
 plt.ylabel('Percentage')
-plt.legend()
+plt.legend(loc=(-0.3,0))
 plt.show()
