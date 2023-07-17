@@ -54,3 +54,16 @@ plt.bar(dados_Seculo.index, dados_Seculo['Sheep'], label='Ovelha', bottom = dado
 plt.bar(dados_Seculo.index, dados_Seculo['Pigs'], color='g', label='Porco', bottom = dados_Seculo['Cattle'] + dados_Seculo['Sheep'])
 plt.xlabel('Century')
 plt.legend()
+
+# Cálculo da porcentagem de cada produto em relação ao seu século
+dados_Seculo_pct = dados_Seculo.div(dados_Seculo.sum(axis=1), axis=0) * 100
+
+# Gráfico único de barras empilhadas com as porcentagens
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Cattle'], color='orange', label='Gado')
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Sheep'], label='Ovelha', bottom = dados_Seculo_pct['Cattle'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Pigs'], color='g', label='Porco', bottom = dados_Seculo_pct['Cattle'] + dados_Seculo_pct['Sheep'])
+
+plt.xlabel('Century')
+plt.ylabel('Percentage')
+plt.legend(loc=(-0.3,0))
+plt.show()
