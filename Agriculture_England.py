@@ -67,3 +67,19 @@ plt.bar(dados_Seculo.index, dados_Seculo['Pulses'], color='pink', label='Pulses'
 plt.bar(dados_Seculo.index, dados_Seculo['Potatoes'], label='Pork', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'] + dados_Seculo['Pulses'])
 plt.xlabel('Century')
 plt.legend()
+
+# Cálculo da porcentagem de cada produto em relação ao seu século
+dados_Seculo_pct = dados_Seculo.div(dados_Seculo.sum(axis=1), axis=0) * 100
+
+# Gráfico único de barras empilhadas com as porcentagens
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Wheat'], color='orange', label='Wheat')
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Rye'], color='purple', label='Rye', bottom=dados_Seculo_pct['Wheat'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Barley'], color='gray', label='Barley', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Oats'], color='g', label='Oats', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Pulses'], color='pink', label='Pulses', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'] + dados_Seculo_pct['Oats'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Potatoes'], label='Potatoes', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'] + dados_Seculo_pct['Oats'] + dados_Seculo_pct['Pulses'])
+
+plt.xlabel('Century')
+plt.ylabel('Percentage')
+plt.legend()
+plt.show()
