@@ -94,3 +94,21 @@ plt.bar(dados_Seculo.index, dados_Seculo['Hides'], color='y', label='Hides', bot
 plt.bar(dados_Seculo.index, dados_Seculo['Hay'], color='r', label='Hay', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'] + dados_Seculo['Veal'] + dados_Seculo['Mutton'] + dados_Seculo['Pork'] + dados_Seculo['Wool'] + dados_Seculo['Hides'])
 plt.xlabel('Century')
 plt.legend()
+
+# Cálculo da porcentagem de cada produto em relação ao seu século
+dados_Seculo_pct = dados_Seculo.div(dados_Seculo.sum(axis=1), axis=0) * 100
+
+# Gráfico único de barras empilhadas com as porcentagens
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Milk'], color='orange', label='Milk')
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Beef'], color='purple', label='Beef', bottom = dados_Seculo_pct['Milk'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Veal'], color='gray', label='Veal', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Mutton'], color='g', label='Mutton', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'] + dados_Seculo_pct['Veal'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Pork'], color='pink', label='Pork', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'] + dados_Seculo_pct['Veal']  + dados_Seculo_pct['Mutton'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Wool'], color='b', label='Wool', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'] + dados_Seculo_pct['Veal'] + dados_Seculo_pct['Mutton'] + dados_Seculo_pct['Pork'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Hides'], color='y', label='Hides', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'] + dados_Seculo_pct['Veal'] + dados_Seculo_pct['Mutton'] + dados_Seculo_pct['Pork'] + dados_Seculo_pct['Wool'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Hay'], color='r', label='Hay', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'] + dados_Seculo_pct['Veal'] + dados_Seculo_pct['Mutton'] + dados_Seculo_pct['Pork'] + dados_Seculo_pct['Wool'] + dados_Seculo_pct['Hides'])
+
+plt.xlabel('Century')
+plt.ylabel('Percentage')
+plt.legend(loc=(-0.3,0))
+plt.show()
