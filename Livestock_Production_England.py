@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-#from Calculate_Century import find_century
+from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
 URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQSv10S9cssxOoBF2QGYNukBK-vCgB8fVkhqwtj5n0ASD0OLVBpF15lKakXNUia-90CXokHd47r572c/pub?output=xlsx'
