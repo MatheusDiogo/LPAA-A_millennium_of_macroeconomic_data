@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sn
 from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
@@ -84,3 +85,26 @@ plt.xlabel('Century')
 plt.ylabel('Percentage')
 plt.suptitle("Production Agriculture Comparatade", fontsize=30)
 plt.savefig('Production Agriculture Comparatade.png')
+
+# Calculando a matriz de correlação agri_eng e Population of England
+agri_eng['Population of England'] = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A2. Pop of Eng & GB 1086-1870', skiprows = range(0, 190), usecols = 'B'))
+agri_eng.drop(index=601, inplace=True)
+agri_eng['Potatoes.1'].fillna(0, inplace=True)
+agri_eng.dropna(inplace=True)
+agri_eng.reset_index(drop=True, inplace=True)
+agri_eng = agri_eng.astype(float)
+
+# Seleciona apenas a coluna 'Population of England' e as outras colunas do DataFrame
+colunas_selecionadas = ['Population of England'] + list(agri_eng.columns.difference(['Population of England']))
+
+# Calcula a matriz de correlação apenas para as colunas selecionadas
+correlation_matrix = agri_eng[colunas_selecionadas].corr()
+
+# Ordena a matriz de correlação com base nos valores da coluna 'Population of England'
+correlation_matrix_sorted = correlation_matrix.sort_values(by='Population of England', ascending=False)
+
+# Cria o mapa de calor da correlação ordenada
+plt.figure(figsize=(8, 6))
+sn.heatmap(correlation_matrix_sorted[['Population of England']], annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5, linecolor="k")
+plt.title("Correlation Heatmap - Population and Agriculture")
+plt.savefig('Correlation Heatmap - Population and Agriculture.png')
