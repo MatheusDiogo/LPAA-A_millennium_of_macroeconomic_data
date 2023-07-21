@@ -47,7 +47,6 @@ dados_Seculo = pd.DataFrame()
 dados_Seculo['Cattle'] = rebanhos_eng.groupby(['Century'])['Cattle'].sum()
 dados_Seculo['Sheep'] = rebanhos_eng.groupby(['Century'])['Sheep'].sum()
 dados_Seculo['Pigs'] = rebanhos_eng.groupby(['Century'])['Pigs'].sum()
-dados_Seculo
 
 #Plotando gráfico de barras empilhadas
 plt.bar(dados_Seculo.index, dados_Seculo['Cattle'], color='orange', label='Gado')
@@ -66,5 +65,5 @@ plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Pigs'], color='g', label='Porc
 
 plt.xlabel('Century')
 plt.ylabel('Percentage')
-plt.legend(loc=(-0.3,0))
-plt.show()
+plt.suptitle("Number of animals Comparatade")
+plt.savefig('Number of animals Comparatade.png')
