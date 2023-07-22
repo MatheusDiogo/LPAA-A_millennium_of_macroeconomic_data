@@ -56,6 +56,7 @@ plt.xlabel('Year')
 
 plt.suptitle("Livestock products production in millions")
 plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.15, hspace=0.4)
+plt.savefig('Livestock products production in millions.png')
 
 #Gráfico único
 plt.plot(pecuaria_eng['Year'], pecuaria_eng['Beef '], color='r', label='Carne Bovina')
