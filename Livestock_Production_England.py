@@ -55,8 +55,9 @@ plt.title('Feno')
 plt.xlabel('Year')
 
 plt.suptitle("Livestock products production in millions")
-plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.92, wspace=0.15, hspace=0.4)
+plt.tight_layout()
 plt.savefig('Livestock products production in millions.png')
+plt.close()
 
 #Gráfico único
 plt.plot(pecuaria_eng['Year'], pecuaria_eng['Beef '], color='r', label='Carne Bovina')
@@ -68,8 +69,11 @@ plt.plot(pecuaria_eng['Year'], pecuaria_eng['Wool '], color='b', label='Lã')
 plt.plot(pecuaria_eng['Year'], pecuaria_eng['Hides'], color='g', label='Peles')
 plt.plot(pecuaria_eng['Year'], pecuaria_eng['Hay'], color='orange', label='Feno')
 plt.legend()
-plt.title('Livestock products production in millions')
 plt.xlabel('Year')
+plt.title('Livestock products production in millions')
+plt.tight_layout()
+plt.savefig('Livestock products production in millions unico.png')
+plt.close()
 
 #Recebendo dados por século
 pecuaria_eng['Century'] = find_century(pecuaria_eng['Year'])
@@ -85,6 +89,8 @@ dados_Seculo['Hay'] = pecuaria_eng.groupby(['Century'])['Hay'].sum()
 dados_Seculo
 
 #Plotando gráfico de barras empilhadas
+plt.figure(figsize=(8, 6))
+plt.subplot(1, 2, 1)
 plt.bar(dados_Seculo.index, dados_Seculo['Milk'], color='orange', label='Milk')
 plt.bar(dados_Seculo.index, dados_Seculo['Beef'], color='purple', label='Beef', bottom = dados_Seculo['Milk'])
 plt.bar(dados_Seculo.index, dados_Seculo['Veal'], color='gray', label='Veal', bottom = dados_Seculo['Milk'] + dados_Seculo['Beef'])
@@ -99,7 +105,8 @@ plt.legend()
 # Cálculo da porcentagem de cada produto em relação ao seu século
 dados_Seculo_pct = dados_Seculo.div(dados_Seculo.sum(axis=1), axis=0) * 100
 
-# Gráfico único de barras empilhadas com as porcentagens
+# Gráfico de barras empilhadas com as porcentagens
+plt.subplot(1, 2, 2)
 plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Milk'], color='orange', label='Milk')
 plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Beef'], color='purple', label='Beef', bottom = dados_Seculo_pct['Milk'])
 plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Veal'], color='gray', label='Veal', bottom = dados_Seculo_pct['Milk'] + dados_Seculo_pct['Beef'])
@@ -111,5 +118,6 @@ plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Hay'], color='r', label='Hay',
 
 plt.xlabel('Century')
 plt.ylabel('Percentage')
-plt.legend(loc=(-0.3,0))
-plt.show()
+plt.suptitle("Livestock products production comparatade")
+plt.tight_layout()
+plt.savefig('Livestock products production comparatade.png')
