@@ -141,7 +141,7 @@ correlation_matrix_sorted = correlation_matrix.sort_values(by='Population of Eng
 # Cria o mapa de calor da correlação ordenada
 plt.figure(figsize=(8, 6))
 sn.heatmap(correlation_matrix_sorted[['Population of England']], annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5, linecolor="k")
-plt.title("Correlation Heatmap - Livestock and Agriculture")
+plt.title("Correlation Heatmap - Population and Livestock")
 plt.tight_layout()
-plt.savefig('Correlation Heatmap - Livestock and Agriculture.png')
+plt.savefig('Correlation Heatmap - Population and Livestock.png')
 plt.close()
