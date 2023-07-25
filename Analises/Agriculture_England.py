@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sn
+import dataframe_image as dfi
 from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
@@ -64,12 +65,12 @@ dados_Seculo['Potatoes'] = agri_eng.groupby(['Century'])['Potatoes.1'].sum()
 #Plotando gráfico de barras empilhadas
 plt.figure(figsize=(8, 6))
 plt.subplot(1, 2, 1)
-plt.bar(dados_Seculo.index, dados_Seculo['Wheat'], color='orange', label='Wheat')
-plt.bar(dados_Seculo.index, dados_Seculo['Rye'], color='purple', label='Rye', bottom = dados_Seculo['Wheat'])
-plt.bar(dados_Seculo.index, dados_Seculo['Barley'], color='gray', label='Barley', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'])
-plt.bar(dados_Seculo.index, dados_Seculo['Oats'], color='g', label='Oats', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'])
+plt.bar(dados_Seculo.index, dados_Seculo['Wheat'], color='orange', label='Trigo')
+plt.bar(dados_Seculo.index, dados_Seculo['Rye'], color='purple', label='Centeio', bottom = dados_Seculo['Wheat'])
+plt.bar(dados_Seculo.index, dados_Seculo['Barley'], color='gray', label='Cevada', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'])
+plt.bar(dados_Seculo.index, dados_Seculo['Oats'], color='g', label='Aveia', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'])
 plt.bar(dados_Seculo.index, dados_Seculo['Pulses'], color='pink', label='Pulses', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'])
-plt.bar(dados_Seculo.index, dados_Seculo['Potatoes'], label='Potatoes', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'] + dados_Seculo['Pulses'])
+plt.bar(dados_Seculo.index, dados_Seculo['Potatoes'], label='Tomate', bottom = dados_Seculo['Wheat'] + dados_Seculo['Rye'] + dados_Seculo['Barley'] + dados_Seculo['Oats'] + dados_Seculo['Pulses'])
 plt.xlabel('Century')
 plt.legend()
 
@@ -78,17 +79,20 @@ dados_Seculo_pct = dados_Seculo.div(dados_Seculo.sum(axis=1), axis=0) * 100
 
 # Gráfico único de barras empilhadas com as porcentagens
 plt.subplot(1, 2, 2)
-plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Wheat'], color='orange', label='Wheat')
-plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Rye'], color='purple', label='Rye', bottom=dados_Seculo_pct['Wheat'])
-plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Barley'], color='gray', label='Barley', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'])
-plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Oats'], color='g', label='Oats', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Wheat'], color='orange', label='Trigo')
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Rye'], color='purple', label='Centeio', bottom=dados_Seculo_pct['Wheat'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Barley'], color='gray', label='Cevada', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Oats'], color='g', label='Aveia', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'])
 plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Pulses'], color='pink', label='Pulses', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'] + dados_Seculo_pct['Oats'])
-plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Potatoes'], label='Potatoes', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'] + dados_Seculo_pct['Oats'] + dados_Seculo_pct['Pulses'])
+plt.bar(dados_Seculo_pct.index, dados_Seculo_pct['Potatoes'], label='Tomate', bottom=dados_Seculo_pct['Wheat'] + dados_Seculo_pct['Rye'] + dados_Seculo_pct['Barley'] + dados_Seculo_pct['Oats'] + dados_Seculo_pct['Pulses'])
 plt.xlabel('Century')
 plt.ylabel('Percentage')
 plt.suptitle("Production Agriculture Comparatade")
 plt.tight_layout()
 plt.savefig(Pasta_Salvar + 'Production Agriculture Comparatade.png')
+plt.close()
+
+dfi.export(dados_Seculo_pct.apply(pd.to_numeric, errors='coerce').round(1).T, Pasta_Salvar + 'Agriculture for Century.png')
 plt.close()
 
 # Calculando a matriz de correlação agri_eng e Population of England
