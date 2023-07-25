@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQSv10S9cssxOoBF2QGYNukBK-vCgB8fVkhqwtj5n0ASD0OLVBpF15lKakXNUia-90CXokHd47r572c/pub?output=xlsx'
 
 df = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A2. Pop of Eng & GB 1086-1870', skiprows = range(0, 7)))
+Pasta_Salvar = 'D:\Matheus\Estudos\Python - LPAA\LPAA-A_millennium_of_macroeconomic_data\Graficos_e_Imagens/'
 
 #Removendo dados Nan do banco de dados
 df['Year'].dropna(inplace = True)
@@ -40,4 +41,4 @@ plt.annotate('Guerra dos cem anos', xy=(df['Year'][year_1337_index], df['Populat
 plt.annotate('(1337)', xy=(df['Year'][year_1337_index], df['Population_of_England_in_millions'][year_1337_index]), xytext=(df['Year'][year_1337_index]-37, df['Population_of_England_in_millions'][year_1337_index]+1), color='k')
 plt.annotate('(1453)', xy=(df['Year'][year_1453_index], df['Population_of_England_in_millions'][year_1453_index]), xytext=(df['Year'][year_1453_index]-37, df['Population_of_England_in_millions'][year_1453_index]+1), color='k')
 
-plt.show()
+plt.savefig(Pasta_Salvar + 'Number of Pupulation from England')
