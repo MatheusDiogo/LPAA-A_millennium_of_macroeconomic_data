@@ -20,7 +20,7 @@
     <p>Os seguintes requisitos são necessários para executar o projeto:</p>
     <ul>
         <li>Python 3.7 ou superior</li>
-        <li>Bibliotecas Python: pandas, matplotlib, seaborn</li>
+        <li>Bibliotecas Python: pandas, matplotlib, seaborn e dataframe_image.</li>
     </ul>
 
 <h2>Arquivos do Projeto</h2>
