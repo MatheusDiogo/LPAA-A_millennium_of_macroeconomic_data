@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sn
+import dataframe_image as dfi
 from Calculate_Century import find_century
 
 #Recebendo dados do google sheets
@@ -123,6 +124,9 @@ plt.ylabel('Percentage')
 plt.suptitle("Livestock products production comparatade")
 plt.tight_layout()
 plt.savefig(Pasta_Salvar + 'Livestock products production comparatade.png')
+
+dfi.export(dados_Seculo_pct.apply(pd.to_numeric, errors='coerce').round(1).T, Pasta_Salvar + 'Livestock Production for Century.png')
+plt.close()
 
 # Calculando a matriz de correlação agri_eng e Population of England
 pecuaria_eng['Population of England'] = pd.DataFrame(pd.read_excel(URL, sheet_name = 'A2. Pop of Eng & GB 1086-1870', skiprows = range(0, 190), usecols = 'B'))

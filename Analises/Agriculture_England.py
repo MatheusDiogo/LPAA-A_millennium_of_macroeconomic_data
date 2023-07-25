@@ -92,7 +92,7 @@ plt.tight_layout()
 plt.savefig(Pasta_Salvar + 'Production Agriculture Comparatade.png')
 plt.close()
 
-dfi.export(dados_Seculo_pct.apply(pd.to_numeric, errors='coerce').round(1).T, Pasta_Salvar + 'Agriculture for Century.png')
+dfi.export(dados_Seculo_pct.apply(pd.to_numeric, errors='coerce').round().T, Pasta_Salvar + 'Agriculture for Century.png')
 plt.close()
 
 # Calculando a matriz de correlação agri_eng e Population of England
